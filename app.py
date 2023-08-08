@@ -1,5 +1,4 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from requests import get
 
 
 # Для начала определим настройки запуска
@@ -18,11 +17,11 @@ class MyServer(BaseHTTPRequestHandler):
         return data
     def do_GET(self):
         """ Метод для обработки входящих GET-запросов """
-        self.page_content = self.get_html()
+        page_content = self.get_html()
         self.send_response(200) # Отправка кода ответа
-        self.send_header("Content-type", "application/json") # Отправка типа данных, который будет передаваться
+        self.send_header("Content-type", "text/html") # Отправка типа данных, который будет передаваться
         self.end_headers() # Завершение формирования заголовков ответа
-        self.wfile.write(bytes(self.page_content, "utf-8")) # Тело ответа
+        self.wfile.write(bytes(page_content, "utf-8")) # Тело ответа
 
 
 if __name__ == "__main__":
